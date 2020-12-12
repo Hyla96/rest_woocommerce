@@ -2,7 +2,7 @@ name: rest_woocommerce
 description: An easy to use and efficient package to talk with woocommerce's rest api
 version: 0.0.1
 author: Gabriel Costache <cn.gabri3l@gmail.com>
-homepage:
+homepage: https://github.com/Hyla96/rest_woocommerce
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   chopper: ^3.0.6
+  json_serializable: ^3.5.1
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,4 @@
 library rest_woocommerce;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'stuff/models/models.dart';
+export 'stuff/woo_commerce.dart';

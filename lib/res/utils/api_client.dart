@@ -24,8 +24,7 @@ class ClientManagement {
         ],
         interceptors: [
           HeadersInterceptor({
-            'Authorization':
-                'Basic ${stringToBase64.encode('${key}:${secret}')}'
+            'Authorization': 'Basic ${stringToBase64.encode('$key:$secret')}'
           }),
         ],
         converter: JsonToTypeConverter(converters),

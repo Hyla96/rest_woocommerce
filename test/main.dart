@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:rest_woocommerce/res/models/order/woo_commerce_order.dart';
 import 'package:rest_woocommerce/res/woo_commerce.dart';
 import 'package:rest_woocommerce/rest_woocommerce.dart';
 

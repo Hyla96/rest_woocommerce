@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'woo_commerce_order_shipping.g.dart';
+part 'woo_commerce_shipping.g.dart';
 
 @JsonSerializable()
-class WooCommerceOrderShipping {
-  WooCommerceOrderShipping(
+class WooCommerceShipping {
+  WooCommerceShipping(
       {this.firstName,
       this.lastName,
       this.country,
@@ -15,10 +15,10 @@ class WooCommerceOrderShipping {
       this.company,
       this.postcode});
 
-  factory WooCommerceOrderShipping.fromJson(Map<String, dynamic> json) =>
-      _$WooCommerceOrderShippingFromJson(json);
+  factory WooCommerceShipping.fromJson(Map<String, dynamic> json) =>
+      _$WooCommerceShippingFromJson(json);
 
-  Map<String, dynamic> toJson() => _$WooCommerceOrderShippingToJson(this);
+  Map<String, dynamic> toJson() => _$WooCommerceShippingToJson(this);
 
   @JsonKey(name: 'first_name')
   String firstName;

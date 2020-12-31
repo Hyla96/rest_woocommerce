@@ -22,6 +22,17 @@ enum WooCommerceProductStatus {
   publish,
 }
 
+enum WooCommerceCatalogVisibility {
+  @JsonValue('visible')
+  visible,
+  @JsonValue('catalog')
+  catalog,
+  @JsonValue('search')
+  search,
+  @JsonValue('hidden')
+  hidden,
+}
+
 enum WooCommerceOrderStatus {
   @JsonValue('pending')
   pending,

@@ -1,44 +1,44 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../enums.dart';
-import '../woo_commerce_object.dart';
+import 'enums.dart';
+import 'woo_commerce_object.dart';
 
 part 'woo_commerce_order.g.dart';
 
 @JsonSerializable()
 class WooCommerceOrder extends WooCommerceObject {
-  WooCommerceOrder(
-      {id,
-      dateCreated,
-      dateModified,
-      this.number,
-      this.orderKey,
-      this.cartHash,
-      this.cartTax,
-      this.createdVia,
-      this.customerIPAddress,
-      this.customerUserAgent,
-      this.dateCompleted,
-      this.datePaid,
-      this.discountTax,
-      this.discountTotal,
-      this.pricesIncludeTax,
-      this.refunds,
-      this.shippingTax,
-      this.shippingTotal,
-      this.taxLines,
-      this.total,
-      this.totalMax,
-      this.currency,
-      this.status,
-      this.version,
-      this.customerId,
-      this.customerNote,
-      this.parentId,
-      this.paymentMethod,
-      this.paymentMethodTitle,
-      this.transactionId})
-      : super(id: id, dateCreated: dateCreated, dateModified: dateModified);
+  WooCommerceOrder({
+    id,
+    dateCreated,
+    dateModified,
+    this.number,
+    this.orderKey,
+    this.cartHash,
+    this.cartTax,
+    this.createdVia,
+    this.customerIPAddress,
+    this.customerUserAgent,
+    this.dateCompleted,
+    this.datePaid,
+    this.discountTax,
+    this.discountTotal,
+    this.pricesIncludeTax,
+    this.refunds,
+    this.shippingTax,
+    this.shippingTotal,
+    this.taxLines,
+    this.total,
+    this.totalMax,
+    this.currency,
+    this.status,
+    this.version,
+    this.customerId,
+    this.customerNote,
+    this.parentId,
+    this.paymentMethod,
+    this.paymentMethodTitle,
+    this.transactionId,
+  }) : super(id: id, dateCreated: dateCreated, dateModified: dateModified);
 
   factory WooCommerceOrder.fromJson(Map<String, dynamic> json) =>
       _$WooCommerceOrderFromJson(json);

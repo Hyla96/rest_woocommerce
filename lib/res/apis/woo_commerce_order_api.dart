@@ -1,6 +1,6 @@
 import 'package:chopper/chopper.dart';
 
-import '../models/order/woo_commerce_order.dart';
+import '../models/woo_commerce_order.dart';
 
 part 'woo_commerce_order_api.chopper.dart';
 

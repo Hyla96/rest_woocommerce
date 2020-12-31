@@ -1,5 +1,5 @@
 import 'package:chopper/chopper.dart';
-import 'package:rest_woocommerce/stuff/utils/api_client.dart';
+import 'package:rest_woocommerce/res/utils/api_client.dart';
 
 import 'apis/apis.dart';
 import 'models/models.dart';
@@ -47,7 +47,7 @@ class WooCommerce {
 
   Future<WooCommerceOrder> createOrder(WooCommerceOrder order) async {
     final _service = _client.getService<WooCommerceOrderApi>();
-    final response = await _service.post(order.id, order);
+    final response = await _service.post(order);
     print(response.isSuccessful);
     print(response.error);
     print(response.statusCode);

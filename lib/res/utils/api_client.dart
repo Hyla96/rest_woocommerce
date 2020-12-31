@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:chopper/chopper.dart';
-import 'package:rest_woocommerce/stuff/models/woo_commerce_order.dart';
+import 'package:rest_woocommerce/res/models/order/woo_commerce_order.dart';
 
 import '../apis/woo_commerce_order_api.dart';
 import 'json_to_type_converter.dart';

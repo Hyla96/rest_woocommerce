@@ -1,6 +1,6 @@
 import 'package:chopper/chopper.dart';
 
-import '../models/woo_commerce_order.dart';
+import '../models/order/woo_commerce_order.dart';
 
 part 'woo_commerce_order_api.chopper.dart';
 
@@ -12,9 +12,8 @@ abstract class WooCommerceOrderApi extends ChopperService {
   @Get(path: '/{id}')
   Future<Response<WooCommerceOrder>> get(@Path() int id);
 
-  @Post(path: '/{id}')
-  Future<Response<WooCommerceOrder>> post(
-      @Path() int id, @Body() WooCommerceOrder body);
+  @Post(path: '')
+  Future<Response<WooCommerceOrder>> post(@Body() WooCommerceOrder body);
 
   @Put(path: '/{id}')
   Future<Response<WooCommerceOrder>> put(

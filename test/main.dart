@@ -1,4 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:rest_woocommerce/res/models/order/woo_commerce_order.dart';
+import 'package:rest_woocommerce/res/woo_commerce.dart';
 import 'package:rest_woocommerce/rest_woocommerce.dart';
 
 void main() {
@@ -10,7 +12,6 @@ void main() {
     final WooCommerce commerce =
         WooCommerce(consumerKey: key, consumerSecret: secret, baseUrl: url);
     WooCommerceOrder order = await commerce.getOrder(7563);
-
     print('First print: ' + order.id.toString());
     expect(double.parse(order.total) > 0, true);
     WooCommerceOrder order2 = order..customerNote = 'OK';

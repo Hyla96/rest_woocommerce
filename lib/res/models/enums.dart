@@ -1,5 +1,27 @@
 import 'package:json_annotation/json_annotation.dart';
 
+enum WooCommerceProductType {
+  @JsonValue('simple')
+  simple,
+  @JsonValue('grouped')
+  grouped,
+  @JsonValue('external')
+  external,
+  @JsonValue('variable')
+  variable,
+}
+
+enum WooCommerceProductStatus {
+  @JsonValue('pending')
+  pending,
+  @JsonValue('draft')
+  draft,
+  @JsonValue('private')
+  private,
+  @JsonValue('publish')
+  publish,
+}
+
 enum WooCommerceOrderStatus {
   @JsonValue('pending')
   pending,
@@ -19,7 +41,7 @@ enum WooCommerceOrderStatus {
   trash
 }
 
-enum WooCommerceOrderCurrency {
+enum WooCommerceCurrency {
   @JsonValue('AED')
   AED,
   @JsonValue('AFN')

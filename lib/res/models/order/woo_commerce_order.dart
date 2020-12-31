@@ -1,13 +1,18 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'enums.dart';
+import '../enums.dart';
+import '../woo_commerce_object.dart';
 
 part 'woo_commerce_order.g.dart';
 
 @JsonSerializable()
-class WooCommerceOrder {
+class WooCommerceOrder extends WooCommerceObject {
   WooCommerceOrder(
-      {this.id,
+      {id,
+      dateCreated,
+      dateCreatedGMT,
+      dateModified,
+      dateModifiedGMT,
       this.number,
       this.orderKey,
       this.cartHash,
@@ -17,10 +22,6 @@ class WooCommerceOrder {
       this.customerUserAgent,
       this.dateCompleted,
       this.dateCompletedGMT,
-      this.dateCreated,
-      this.dateCreatedGMT,
-      this.dateModified,
-      this.dateModifiedGMT,
       this.datePaid,
       this.datePaidGMT,
       this.discountTax,
@@ -40,15 +41,18 @@ class WooCommerceOrder {
       this.parentId,
       this.paymentMethod,
       this.paymentMethodTitle,
-      this.transactionId});
+      this.transactionId})
+      : super(
+            id: id,
+            dateCreated: dateCreated,
+            dateCreatedGMT: dateCreatedGMT,
+            dateModified: dateModified,
+            dateModifiedGMT: dateModifiedGMT);
 
   factory WooCommerceOrder.fromJson(Map<String, dynamic> json) =>
       _$WooCommerceOrderFromJson(json);
 
   Map<String, dynamic> toJson() => _$WooCommerceOrderToJson(this);
-
-  @JsonKey(name: 'id')
-  final int id;
 
   @JsonKey(name: 'number')
   final String number;
@@ -61,18 +65,6 @@ class WooCommerceOrder {
 
   @JsonKey(name: 'version')
   final String version;
-
-  @JsonKey(name: 'date_created')
-  final DateTime dateCreated;
-
-  @JsonKey(name: 'date_created_gmt')
-  final DateTime dateCreatedGMT;
-
-  @JsonKey(name: 'date_modified')
-  final DateTime dateModified;
-
-  @JsonKey(name: 'date_modified_gmt')
-  final DateTime dateModifiedGMT;
 
   @JsonKey(name: 'discount_total')
   final String discountTotal;
@@ -129,7 +121,7 @@ class WooCommerceOrder {
   WooCommerceOrderStatus status;
 
   @JsonKey(name: 'currency')
-  WooCommerceOrderCurrency currency;
+  WooCommerceCurrency currency;
 
   @JsonKey(name: 'parent_id')
   int parentId;

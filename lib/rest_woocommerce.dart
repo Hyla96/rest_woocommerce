@@ -1,4 +1,4 @@
 library rest_woocommerce;
 
-export 'stuff/models/models.dart';
-export 'stuff/woo_commerce.dart';
+export 'res/models/models.dart';
+export 'res/woo_commerce.dart';

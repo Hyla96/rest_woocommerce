@@ -19,6 +19,8 @@ class ClientManagement {
         services: [
           WooCommerceOrderApi.create(),
           WooCommerceCouponApi.create(),
+          WooCommerceCustomerApi.create(),
+          WooCommerceProductApi.create(),
         ],
         interceptors: [
           HeadersInterceptor({
@@ -33,5 +35,7 @@ class ClientManagement {
   Map<Type, Function> converters = {
     WooCommerceOrder: (jsonData) => WooCommerceOrder.fromJson(jsonData),
     WooCommerceCoupon: (jsonData) => WooCommerceCoupon.fromJson(jsonData),
+    WooCommerceCustomer: (jsonData) => WooCommerceCustomer.fromJson(jsonData),
+    WooCommerceProduct: (jsonData) => WooCommerceProduct.fromJson(jsonData),
   };
 }

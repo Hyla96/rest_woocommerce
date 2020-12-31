@@ -10,9 +10,7 @@ class WooCommerceProduct extends WooCommerceObject {
   WooCommerceProduct(
       {id,
       dateCreated,
-      dateCreatedGMT,
       dateModified,
-      dateModifiedGMT,
       this.cartHash,
       this.cartTax,
       this.customerIPAddress,
@@ -20,9 +18,7 @@ class WooCommerceProduct extends WooCommerceObject {
       this.permalink,
       this.customerUserAgent,
       this.dateCompleted,
-      this.dateCompletedGMT,
       this.datePaid,
-      this.datePaidGMT,
       this.pricesIncludeTax,
       this.refunds,
       this.shippingTax,
@@ -38,12 +34,7 @@ class WooCommerceProduct extends WooCommerceObject {
       this.paymentMethod,
       this.paymentMethodTitle,
       this.transactionId})
-      : super(
-            id: id,
-            dateModifiedGMT: dateModifiedGMT,
-            dateModified: dateModified,
-            dateCreatedGMT: dateCreatedGMT,
-            dateCreated: dateCreated);
+      : super(id: id, dateModified: dateModified, dateCreated: dateCreated);
 
   factory WooCommerceProduct.fromJson(Map<String, dynamic> json) =>
       _$WooCommerceProductFromJson(json);
@@ -92,14 +83,8 @@ class WooCommerceProduct extends WooCommerceObject {
   @JsonKey(name: 'date_paid')
   final DateTime datePaid;
 
-  @JsonKey(name: 'date_paid_gmt')
-  final DateTime datePaidGMT;
-
   @JsonKey(name: 'date_completed')
   final DateTime dateCompleted;
-
-  @JsonKey(name: 'date_completed_gmt')
-  final DateTime dateCompletedGMT;
 
   @JsonKey(name: 'cart_hash')
   final String cartHash;

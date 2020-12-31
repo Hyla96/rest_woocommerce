@@ -8,19 +8,28 @@ void main() {
   final String secret = 'cs_2eba0487ddb218756933fb3a3fcf03a00efa92ec';
   final String url = 'https://www.casabalo.com';
 
-  test('Counter value should be incremented', () async {
-    final WooCommerce commerce =
-        WooCommerce(consumerKey: key, consumerSecret: secret, baseUrl: url);
-    WooCommerceOrder order = await commerce.getOrder(7563);
-    print('First print: ' + order.id.toString());
-    expect(double.parse(order.total) > 0, true);
-    WooCommerceOrder order2 = order..customerNote = 'OK';
-    print('Second print: ' + order2.id.toString());
-    final order3 = await commerce.createOrder(order);
-    print('Third print: ' + order3.id.toString());
-    final order4 = await commerce.updateOrder(order3..customerNote = 'MEH');
-    print('Forth print: ' + order4.id.toString());
-    final bool k = await commerce.deleteOrder(order4.id);
-    print('Fifth print: ' + k.toString());
+  final WooCommerce commerce =
+      WooCommerce(consumerKey: key, consumerSecret: secret, baseUrl: url);
+  group('Tests', () {
+    test('Orders', () async {
+      print('# Testing get all orders endpoint');
+      List<WooCommerceOrder> orders = await commerce.getOrders();
+      for (WooCommerceOrder order in orders) {
+        print('#${order.id}, €${order.total}, created ${order.dateCreated}');
+      }
+      print('\n');
+      expect(orders.length > 0, true);
+    });
+
+    test('Coupons', () async {
+      print('# Testing get all coupons endpoint');
+      List<WooCommerceCoupon> coupons = await commerce.getCoupons();
+      for (WooCommerceCoupon coupon in coupons) {
+        print(
+            '#${coupon.id}, code ${coupon.code}, created ${coupon.dateCreated}');
+      }
+      print('\n');
+      expect(coupons.length > 0, true);
+    });
   });
 }

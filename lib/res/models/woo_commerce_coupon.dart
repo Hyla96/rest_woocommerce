@@ -8,13 +8,10 @@ class WooCommerceCoupon extends WooCommerceObject {
   WooCommerceCoupon(
       {id,
       dateCreated,
-      dateCreatedGMT,
       dateModified,
-      dateModifiedGMT,
       this.code,
       this.amount,
       this.dateExpires,
-      this.dateExpiresGMT,
       this.description,
       this.discountType,
       this.emailRestrictions,
@@ -33,12 +30,7 @@ class WooCommerceCoupon extends WooCommerceObject {
       this.usageLimitPerUser,
       this.usedBy})
       : assert(code != null),
-        super(
-            id: id,
-            dateCreated: dateCreated,
-            dateCreatedGMT: dateCreatedGMT,
-            dateModified: dateModified,
-            dateModifiedGMT: dateModifiedGMT);
+        super(id: id, dateCreated: dateCreated, dateModified: dateModified);
 
   factory WooCommerceCoupon.fromJson(Map<String, dynamic> json) =>
       _$WooCommerceCouponFromJson(json);
@@ -59,9 +51,6 @@ class WooCommerceCoupon extends WooCommerceObject {
 
   @JsonKey(name: 'date_expires')
   String dateExpires;
-
-  @JsonKey(name: 'date_expires_gmt')
-  String dateExpiresGMT;
 
   @JsonKey(name: 'usage_count')
   int usageCount;

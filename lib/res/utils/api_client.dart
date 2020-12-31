@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:chopper/chopper.dart';
-import 'package:rest_woocommerce/res/models/order/woo_commerce_order.dart';
+import 'package:rest_woocommerce/res/apis/apis.dart';
+import 'package:rest_woocommerce/res/models/models.dart';
 
-import '../apis/woo_commerce_order_api.dart';
 import 'json_to_type_converter.dart';
 
 class ClientManagement {
@@ -18,6 +18,7 @@ class ClientManagement {
         baseUrl: url,
         services: [
           WooCommerceOrderApi.create(),
+          WooCommerceCouponApi.create(),
         ],
         interceptors: [
           HeadersInterceptor({
@@ -31,5 +32,6 @@ class ClientManagement {
 
   Map<Type, Function> converters = {
     WooCommerceOrder: (jsonData) => WooCommerceOrder.fromJson(jsonData),
+    WooCommerceCoupon: (jsonData) => WooCommerceCoupon.fromJson(jsonData),
   };
 }

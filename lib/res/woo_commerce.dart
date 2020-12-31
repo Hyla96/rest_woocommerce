@@ -5,53 +5,132 @@ import 'apis/apis.dart';
 import 'models/models.dart';
 
 class WooCommerce {
-  WooCommerce({this.consumerSecret, this.consumerKey, this.baseUrl})
-      : assert(consumerSecret != null && consumerSecret.isNotEmpty,
-            'No consumer secret passed as parameter'),
-        assert(consumerKey != null && consumerKey.isNotEmpty,
-            'No consumer secret passed as parameter'),
-        assert(baseUrl != null && baseUrl.isNotEmpty,
-            'No base url passed as parameter'),
-        _client = ClientManagement(
-                secret: consumerSecret, key: consumerKey, url: baseUrl)
+  WooCommerce({this.consumerSecret, this.consumerKey, this.baseUrl}) {
+    ChopperClient _client =
+        ClientManagement(secret: consumerSecret, key: consumerKey, url: baseUrl)
             .getClient();
+    _orderService = _client.getService<WooCommerceOrderApi>();
+    _couponService = _client.getService<WooCommerceCouponApi>();
+  }
 
-  final ChopperClient _client;
+  /// Woo Commerce authentication data
   final String consumerKey;
   final String consumerSecret;
   final String baseUrl;
 
-  Future<List<WooCommerceOrder>> getOrders() async {
-    final _service = _client.getService<WooCommerceOrderApi>();
-    final _orders = (await _service.getAll()).body;
-    return _orders;
-  }
+  /// Services
+  WooCommerceOrderApi _orderService;
+  WooCommerceCouponApi _couponService;
 
-  Future<WooCommerceOrder> getOrder(int id) async {
-    final _service = _client.getService<WooCommerceOrderApi>();
-    final _order = (await _service.get(id)).body;
-    return _order;
-  }
+  /// Order service
+  Future<List<WooCommerceOrder>> getOrders(
+          {int page = 1,
+          int perPage = 10,
+          String search,
+          DateTime after,
+          DateTime before,
+          List<int> exclude,
+          List<int> include,
+          int offset,
+          List<int> parent,
+          List<int> parentExclude,
+          OrderByOption orderBy = OrderByOption.date,
+          OrderStatus status = OrderStatus.any,
+          int customer,
+          int product}) async =>
+      (await _orderService.getAll(
+              page: page,
+              perPage: perPage,
+              search: search,
+              after: after != null ? after.toIso8601String() : null,
+              before: before != null ? before.toIso8601String() : null,
+              exclude: exclude,
+              include: include,
+              offset: offset,
+              parent: parent,
+              parentExclude: parentExclude,
+              orderBy: orderBy.toShortString(),
+              status: status.toShortString(),
+              customer: customer,
+              product: product))
+          .body;
 
-  Future<bool> deleteOrder(int id) async {
-    final _service = _client.getService<WooCommerceOrderApi>();
-    final _order = await _service.delete(id);
-    return _order.isSuccessful;
-  }
+  Future<WooCommerceOrder> getOrder(int id) async =>
+      (await _orderService.get(id)).body;
 
-  Future<WooCommerceOrder> updateOrder(WooCommerceOrder order) async {
-    final _service = _client.getService<WooCommerceOrderApi>();
-    final _order = (await _service.put(order.id, order)).body;
-    return _order;
-  }
+  Future<bool> deleteOrder(int id) async =>
+      (await _orderService.delete(id)).isSuccessful;
 
-  Future<WooCommerceOrder> createOrder(WooCommerceOrder order) async {
-    final _service = _client.getService<WooCommerceOrderApi>();
-    final response = await _service.post(order);
-    print(response.isSuccessful);
-    print(response.error);
-    print(response.statusCode);
-    final _order = response.body;
-    return _order;
+  Future<WooCommerceOrder> updateOrder(WooCommerceOrder order) async =>
+      (await _orderService.put(order.id, order)).body;
+
+  Future<WooCommerceOrder> createOrder(WooCommerceOrder order) async =>
+      (await _orderService.post(order)).body;
+
+  /// Coupon service
+  Future<List<WooCommerceCoupon>> getCoupons(
+          {int page = 1,
+          int perPage = 10,
+          String search,
+          DateTime after,
+          DateTime before,
+          List<int> exclude,
+          List<int> include,
+          int offset,
+          List<int> parent,
+          List<int> parentExclude,
+          OrderByOption orderBy = OrderByOption.date,
+          OrderStatus status = OrderStatus.any,
+          OrderOption order = OrderOption.asc,
+          String code}) async =>
+      (await _couponService.getAll(
+        page: page,
+        perPage: perPage,
+        search: search,
+        after: after != null ? after.toIso8601String() : null,
+        before: before != null ? before.toIso8601String() : null,
+        exclude: exclude,
+        include: include,
+        offset: offset,
+        parent: parent,
+        parentExclude: parentExclude,
+        orderBy: orderBy.toShortString(),
+        status: status.toShortString(),
+        order: order.toShortString(),
+        code: code,
+      ))
+          .body;
+}
+
+enum OrderByOption { date, id, include, title, slug }
+enum OrderOption { asc, desc }
+
+enum OrderStatus {
+  any,
+  pending,
+  processing,
+  on_hold,
+  completed,
+  cancelled,
+  refunded,
+  failed,
+  trash
+}
+
+extension ParseOrderByOptionToString on OrderByOption {
+  String toShortString() {
+    return this.toString().split('.').last;
+  }
+}
+
+extension ParseOrderOptionToString on OrderOption {
+  String toShortString() {
+    return this.toString().split('.').last;
+  }
+}
+
+extension ParseStatusToString on OrderStatus {
+  String toShortString() {
+    return this.toString().split('.').last;
   }
 }

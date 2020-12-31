@@ -10,9 +10,7 @@ class WooCommerceOrder extends WooCommerceObject {
   WooCommerceOrder(
       {id,
       dateCreated,
-      dateCreatedGMT,
       dateModified,
-      dateModifiedGMT,
       this.number,
       this.orderKey,
       this.cartHash,
@@ -21,9 +19,7 @@ class WooCommerceOrder extends WooCommerceObject {
       this.customerIPAddress,
       this.customerUserAgent,
       this.dateCompleted,
-      this.dateCompletedGMT,
       this.datePaid,
-      this.datePaidGMT,
       this.discountTax,
       this.discountTotal,
       this.pricesIncludeTax,
@@ -42,12 +38,7 @@ class WooCommerceOrder extends WooCommerceObject {
       this.paymentMethod,
       this.paymentMethodTitle,
       this.transactionId})
-      : super(
-            id: id,
-            dateCreated: dateCreated,
-            dateCreatedGMT: dateCreatedGMT,
-            dateModified: dateModified,
-            dateModifiedGMT: dateModifiedGMT);
+      : super(id: id, dateCreated: dateCreated, dateModified: dateModified);
 
   factory WooCommerceOrder.fromJson(Map<String, dynamic> json) =>
       _$WooCommerceOrderFromJson(json);
@@ -99,14 +90,8 @@ class WooCommerceOrder extends WooCommerceObject {
   @JsonKey(name: 'date_paid')
   final DateTime datePaid;
 
-  @JsonKey(name: 'date_paid_gmt')
-  final DateTime datePaidGMT;
-
   @JsonKey(name: 'date_completed')
   final DateTime dateCompleted;
-
-  @JsonKey(name: 'date_completed_gmt')
-  final DateTime dateCompletedGMT;
 
   @JsonKey(name: 'cart_hash')
   final String cartHash;

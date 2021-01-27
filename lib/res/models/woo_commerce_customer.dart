@@ -2,12 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:rest_woocommerce/res/models/woo_commerce_billing.dart';
 import 'package:rest_woocommerce/res/models/woo_commerce_shipping.dart';
 
-import 'woo_commerce_object.dart';
-
 part 'woo_commerce_customer.g.dart';
 
 @JsonSerializable()
-class WooCommerceCustomer extends WooCommerceObject {
+class WooCommerceCustomer {
   WooCommerceCustomer(
       {id,
       dateCreated,
@@ -22,8 +20,7 @@ class WooCommerceCustomer extends WooCommerceObject {
       this.isPayingCustomer,
       this.role,
       this.shipping})
-      : assert(email != null),
-        super(id: id, dateModified: dateModified, dateCreated: dateCreated);
+      : assert(email != null);
 
   factory WooCommerceCustomer.fromJson(Map<String, dynamic> json) =>
       _$WooCommerceCustomerFromJson(json);

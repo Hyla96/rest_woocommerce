@@ -30,5 +30,27 @@ void main() {
       print('\n');
       expect(coupons.length > 0, true);
     });
+
+    test('Products', () async {
+      print('# Testing get all products endpoint');
+      List<WooCommerceProduct> products = await commerce.getProducts();
+      for (WooCommerceProduct product in products) {
+        print(
+            '#${product.id}, ${product.name}, created ${product.dateCreated}');
+      }
+      print('\n');
+      expect(products.length > 0, true);
+    });
+
+    test('Customers', () async {
+      print('# Testing get all customers endpoint');
+      List<WooCommerceCustomer> customers = await commerce.getCustomers();
+      for (WooCommerceCustomer customer in customers) {
+        print(
+            '#${customer.username}, ${customer.email}, created ${customer.role}');
+      }
+      print('\n');
+      expect(customers.length > 0, true);
+    });
   });
 }

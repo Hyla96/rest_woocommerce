@@ -11,6 +11,8 @@ class WooCommerce {
             .getClient();
     _orderService = _client.getService<WooCommerceOrderApi>();
     _couponService = _client.getService<WooCommerceCouponApi>();
+    _productService = _client.getService<WooCommerceProductApi>();
+    _customerService = _client.getService<WooCommerceCustomerApi>();
   }
 
   /// Woo Commerce authentication data
@@ -21,6 +23,8 @@ class WooCommerce {
   /// Services
   WooCommerceOrderApi _orderService;
   WooCommerceCouponApi _couponService;
+  WooCommerceProductApi _productService;
+  WooCommerceCustomerApi _customerService;
 
   /// Order service
   Future<List<WooCommerceOrder>> getOrders(
@@ -84,6 +88,74 @@ class WooCommerce {
           OrderOption order = OrderOption.asc,
           String code}) async =>
       (await _couponService.getAll(
+        page: page,
+        perPage: perPage,
+        search: search,
+        after: after != null ? after.toIso8601String() : null,
+        before: before != null ? before.toIso8601String() : null,
+        exclude: exclude,
+        include: include,
+        offset: offset,
+        parent: parent,
+        parentExclude: parentExclude,
+        orderBy: orderBy.toShortString(),
+        status: status.toShortString(),
+        order: order.toShortString(),
+        code: code,
+      ))
+          .body;
+
+  /// Product service
+  Future<List<WooCommerceProduct>> getProducts(
+          {int page = 1,
+          int perPage = 10,
+          String search,
+          DateTime after,
+          DateTime before,
+          List<int> exclude,
+          List<int> include,
+          int offset,
+          List<int> parent,
+          List<int> parentExclude,
+          OrderByOption orderBy = OrderByOption.date,
+          OrderStatus status = OrderStatus.any,
+          OrderOption order = OrderOption.asc,
+          String code}) async =>
+      (await _productService.getAll(
+        page: page,
+        perPage: perPage,
+        search: search,
+        after: after != null ? after.toIso8601String() : null,
+        before: before != null ? before.toIso8601String() : null,
+        exclude: exclude,
+        include: include,
+        offset: offset,
+        parent: parent,
+        parentExclude: parentExclude,
+        orderBy: orderBy.toShortString(),
+        status: status.toShortString(),
+        order: order.toShortString(),
+        code: code,
+      ))
+          .body;
+
+  /// Product service
+  Future<List<WooCommerceCustomer>> getCustomers(
+          {int page = 1,
+          int perPage = 10,
+          String search,
+          DateTime after,
+          DateTime before,
+          List<int> exclude,
+          List<int> include,
+          int offset,
+          List<int> parent,
+          List<int> parentExclude,
+          OrderByOption orderBy = OrderByOption.date,
+          OrderStatus status = OrderStatus.any,
+          OrderOption order = OrderOption.asc,
+          String code}) async =>
+      (await _customerService.getAll(
         page: page,
         perPage: perPage,
         search: search,
